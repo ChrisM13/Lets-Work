@@ -14,18 +14,26 @@ class App extends Component {
     }
   }
 
-  // componentDidMount() {
-  //   fetch('/products').then(res => res.json())
-  //   .then(products => {
-  //     this.setState({
-  //       products
-  //     })
-  //   })
-  // }
-
   render() {
     return (
       <div>
+        <Router>
+          <Switch>
+            {/* <Route exact path='/' /> */}
+            <Route exact path='/signup' render={(props) =>
+              <SignupPage
+                {...props}
+                handleSignup={this.handleSignup}
+                />}
+              />
+            <Route exact path='/login' render={(props) =>
+              <LoginPage
+                {...props}
+                handleLogin={this.handleLogin}
+                />
+              }/>
+          </Switch>
+        </Router>
        
       </div>
     );
