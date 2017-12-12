@@ -5,6 +5,9 @@ import {
   Route
 } from 'react-router-dom';
 import './App.css';
+import SignupPage from '../SignupPage/SignupPage';
+import LoginPage from '../LoginPage/LoginPage';
+
 
 class App extends Component {
   constructor() {
@@ -17,6 +20,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        Hell World
         <Router>
           <Switch>
             {/* <Route exact path='/' /> */}

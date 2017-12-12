@@ -1,7 +1,7 @@
 import React from 'react';
 import LoginForm from '../../components/LoginForm/LoginForm';
 
-const LogninPage = (props) => {
+const LoginPage = (props) => {
     return (
         <div className='LoginPage'>
             <LoginForm
@@ -10,3 +10,5 @@ const LogninPage = (props) => {
         </div>
     );
 };
+
+export default LoginPage;
