@@ -6,6 +6,7 @@ const LoginPage = (props) => {
         <div className='LoginPage'>
             <LoginForm
                 {...props}
+                handleLogin={props.handleLogin}
                 />
         </div>
     );

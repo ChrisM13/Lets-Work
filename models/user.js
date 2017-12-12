@@ -4,7 +4,12 @@ const Schema = mongoose.Schema;
 
 const SALT_ROUNDS = 6;
 
-const userSchema = Schema({
+const shiftSchema = new Schema({
+    day: String,
+    shift: String
+})
+
+const userSchema = new Schema({
     name: String,
     email: {
         type: String,
@@ -12,8 +17,9 @@ const userSchema = Schema({
         lowercase: true,
         unique: true
     },
-    password: String
-    },{
+    password: String,
+    schedule: [shiftSchema]
+    }, {
     timestamps: true
 });
 
@@ -37,10 +43,11 @@ userSchema.pre('save', function(next) {
 });
 
 userSchema.methods.comparePassword = function(tryPassword, cb) {
-    bcrypt.compare(tryPassword, this.password, function(err, isMatch) {
-        if(err) return cb(err);
-        cb(null, isMatch);
-    });
+    bcrypt.compare(tryPassword, this.password, cb)
+        
+        // function(err, isMatch) {
+        // cb(null, isMatch);
+    // });
 };
 
 module.exports = mongoose.model("User", userSchema)

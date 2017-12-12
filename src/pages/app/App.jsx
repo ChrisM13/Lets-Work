@@ -7,6 +7,8 @@ import {
 import './App.css';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
+import Header from '../../components/Header/NavBar/NavBar';
+import userService from '../../utils/userService';
 
 
 class App extends Component {
@@ -17,13 +19,37 @@ class App extends Component {
     }
   }
 
+  handleLogout = () => {
+    userService.logout();
+    this.setState({user: null});
+  }
+
+  handleSignup = () => {
+    this.setState({user: userService.getUser()});
+  }
+
+  handleLogin = () => {
+    this.setState({user: userService.getUser()});
+  }
+
+/*---------- Lifecycle Methods ----------*/
+
+  componentDidMount() {
+      let user = userService.getUser();
+      this.setState({user});
+  }
+  
   render() {
     return (
       <div>
-        Hell World
         <Router>
           <Switch>
-            {/* <Route exact path='/' /> */}
+            <Route exact path='/' render={() =>
+                <Header
+                  user={this.state.user}
+                  handleLogout={this.handleLogout}
+                />
+              }/>
             <Route exact path='/signup' render={(props) =>
               <SignupPage
                 {...props}

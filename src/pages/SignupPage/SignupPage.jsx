@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import LoginForm from '../../components/LoginForm/LoginForm';
+import SignupForm from '../../components/SignupForm/SignupForm';
 
 class SignupPage extends Component {
     constructor(props) {
@@ -13,8 +13,8 @@ class SignupPage extends Component {
 
     render() {
         return (
-            <div className='LoginPage'>
-                <LoginForm
+            <div className='SignupPage'>
+                <SignupForm
                 {...this.props}
                 updateMessage={this.updateMessage}
                 handleSignup={this.props.handleSignup}
