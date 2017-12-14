@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import userService from '../../utils/userService';
+import {Row, Input} from 'react-materialize';
 
 class SignupForm extends Component {
   constructor(props) {
@@ -9,7 +10,8 @@ class SignupForm extends Component {
       name: '',
       email: '',
       password: '',
-      passwordConf: ''
+      passwordConf: '',
+      manager: ''
     };
   }
 
@@ -63,9 +65,20 @@ class SignupForm extends Component {
             </div>
           </div>
           <div className="form-group">
+            <div className="col-sm-12">
+              <Row>
+                <Input s={12} type='select' label="Select User Type" onChange={(e) => this.handleChange('manager', e)}>
+                  <option value={false}>Employee</option>
+                  <option value={true}>Manager</option>
+                </Input>
+              </Row>
+              {/* <input type="boolean" className="form-control select-dropdown" placeholder="Are you a manager?" value={this.state.manager} onChange={(e) => this.handleChange('manager', e)} /> */}
+            </div>
+          </div>
+          <div className="form-group">
             <div className="col-sm-12 text-center">
               <button className="btn btn-default" disabled={this.isFormInvalid()}>Sign Up</button>&nbsp;&nbsp;
-              <Link to='/'>Cancel</Link>
+              <button className="btn btn-default red"><Link to='/'>Cancel</Link></button>
             </div>
           </div>
         </form>

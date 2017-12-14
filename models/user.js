@@ -4,11 +4,6 @@ const Schema = mongoose.Schema;
 
 const SALT_ROUNDS = 6;
 
-const shiftSchema = new Schema({
-    day: String,
-    shift: String
-})
-
 const userSchema = new Schema({
     name: String,
     email: {
@@ -18,10 +13,26 @@ const userSchema = new Schema({
         unique: true
     },
     password: String,
-    schedule: [shiftSchema]
+    manager: {
+        type: Boolean, 
+        default: false
+    },
     }, {
     timestamps: true
 });
+
+var user = {
+    schedule: [
+        {
+            day: 'monday',
+            shiftId: 123
+        },
+        {
+            day: 'tuesday',
+            shiftId: 456
+        }
+    ]
+}
 
 userSchema.set('toJSON', {
     transform: function(doc, ret) {

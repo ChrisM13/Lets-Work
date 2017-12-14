@@ -8,6 +8,7 @@ import './App.css';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import Header from '../../components/Header/NavBar/NavBar';
+import EmployeeSchedule from '../../pages/EmployeeSchedule/EmployeeSchedule'
 import userService from '../../utils/userService';
 
 
@@ -15,7 +16,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      Schedule: []
+      allUsers: []
     }
   }
 
@@ -60,6 +61,18 @@ class App extends Component {
               <LoginPage
                 {...props}
                 handleLogin={this.handleLogin}
+                />
+              }/>
+            <Route exact path='/manager/scheduler' render={(props) =>
+              <EmployeeSchedule
+                {...props}
+                user={this.state.user}
+                />
+              }/>
+            <Route exact path='/employees' render={(props) =>
+              <EmployeeSchedule
+                {...props}
+                user={this.state.user}
                 />
               }/>
           </Switch>
