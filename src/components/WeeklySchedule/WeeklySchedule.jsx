@@ -2,7 +2,6 @@ import React from 'react';
 import Employee from '../Employee/Employee';
 
 const WeeklySchedule = (props) => {
-    console.log('WeeklySchedule props=', props)
     return(
         <table>
             <thead>
@@ -18,7 +17,13 @@ const WeeklySchedule = (props) => {
                 </tr>
             </thead>
             <tbody className="bordered striped" >
-                <Employee {...props} />
+                <Employee 
+                {...props}
+                saveSchedule={props.saveSchedule}
+                handleChange={props.handleChange}
+                handleDropdownChange={props.handleDropdownChange}
+                 />
+
             </tbody>
         </table>
     )

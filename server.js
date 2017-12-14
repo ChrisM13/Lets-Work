@@ -17,6 +17,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(require('./config/auth'))
 // Put API routes here, before the "catch all" route
 app.use('/api/users', require('./routes/api/users'))
+app.use('/api/employees', require('./routes/api/employees'))
+
 
 app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));

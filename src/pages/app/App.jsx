@@ -39,7 +39,6 @@ class App extends Component {
       let user = userService.getUser();
       this.setState({user});
   }
-  
   render() {
     return (
       <div>
@@ -63,13 +62,13 @@ class App extends Component {
                 handleLogin={this.handleLogin}
                 />
               }/>
-            <Route exact path='/manager/scheduler' render={(props) =>
+              <Route exact path='/scheduler' render={(props) =>
               <EmployeeSchedule
                 {...props}
                 user={this.state.user}
                 />
               }/>
-            <Route exact path='/employees' render={(props) =>
+              <Route exact path='/employees' render={(props) =>
               <EmployeeSchedule
                 {...props}
                 user={this.state.user}
@@ -77,7 +76,6 @@ class App extends Component {
               }/>
           </Switch>
         </Router>
-       
       </div>
     );
   }

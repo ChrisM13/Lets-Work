@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import AddEmployeeModal from '../../components/AddEmployeeModal/AddEmployeeModal';
-import WeeklySchedule from '../../components/WeeklySchedule/WeeklySchedule'
-import Header from '../../components/Header/Header'
+import WeeklySchedule from '../../components/WeeklySchedule/WeeklySchedule';
+import Header from '../../components/Header/Header';
+import {Row, Col, Preloader} from 'react-materialize';
+import './EmployeeSchedule.css';
 
 
 
@@ -37,7 +39,8 @@ class EmployeeSchedule extends Component {
             {
                 _id: 1,
                 name: 'Chris',
-                manager: false
+                manager: false,
+                scheudle: []
             },
             {
                 _id: 2,
@@ -48,7 +51,7 @@ class EmployeeSchedule extends Component {
                 _id: 3,
                 name: 'Nancy',
                 manager: false
-            },
+            }
         ]})
 
         // console.log('making api call for employee')
@@ -85,31 +88,77 @@ class EmployeeSchedule extends Component {
         ]})
     }
 
-    updateMessage = (msg) => {
-        this.setState({message: msg});
+    handleSubmit = (e) => {
+    e.preventDefault();
+    const newEmployee = {
+        name: this.state.name,
+        email: this.state.email
+    }
+    this.setState({name: '', email: ''})
+
+    this.props.handleAddEmployee(newEmployee)
     }
 
-    handleChange = (field, e) => {
-        console.log("handleChange props", this.props)
-        this.updateMessage('');
+    handleChange(field, e) {
+        this.setState({
+            [field]: e.target.value
+        })
+    }
+
+    // handleWeeklySchedule(e) {
+    //     this.setState({
+    //         employees: employees.push()
+    //     })
+    // }
+
+    handleDropdownChange = (e) => {
+        this.setState({
+            value: e.target.value
+        })
     }
 
     handleAddEmployee = (newEmployee) => {
         console.log('newEmployee =', newEmployee)
-        const response = newEmployee
+        
+        // make fetch request
+        // upon succesful response, update the states like this:
+        const response = newEmployee // mock response
         this.setState({ 
             employees: [...this.state.employees, response]
         })
     }
+
+    saveSchedule = () => {
+        console.log("SENDING EMPLOYEE DATA TO DATABASE")
+        // this.setState({employees: [...]})
+        return fetch('api/employees', {
+                method: "POST",
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    employees: this.state.employees
+                })  
+            })
+            .then(response => response.json())
+            .catch(err => {
+                console.error(err);
+            });
+    }
     
     render() {
-        console.log("Employee Schedule Employees ",this.state.employees)
-        console.log("Employee Schedule USER", this.props.user)
         if (this.state.employees.length === 0) {
-            return (<div>Loading</div>)
+            return (
+                <Row className="preloader">
+                    <Col s={4}>
+                        <Preloader flashing size='big'/>
+                    </Col>
+                </Row>
+            )
         } 
         //if manager then render buttons and add employee component
-        if(this.props.user.manager ? true : "Loading") {
+        if(this.props.user.manager ? true : false) {
             return(
                 <div>
                     <Header 
@@ -117,14 +166,15 @@ class EmployeeSchedule extends Component {
                     />
                     <div className="container">
                         <WeeklySchedule 
-                            employees = {this.state.employees}
-                            shifts = {this.state.shifts}
+                            handleChange={this.handleChange}
+                            employees ={this.state.employees}
+                            shifts ={this.state.shifts}
+                            saveSchedule={this.saveSchedule}
+                            handleDropdownChange={this.handleDropdownChange}
                         />
                         <AddEmployeeModal
                             handleAddEmployee={this.handleAddEmployee}
                         />
-
-                        <div onClick={()=>this.handleAddEmployee()}>test</div>
                     </div>
                 </div>
             )
@@ -137,6 +187,7 @@ class EmployeeSchedule extends Component {
                     />
                     Hellow World
                     <WeeklySchedule 
+                        handleChange={this.handleChange}    
                         employees = {this.state.employees}
                         shifts = {this.state.shifts}
                     />
@@ -145,188 +196,5 @@ class EmployeeSchedule extends Component {
         }
     }
 }
-
-// const EmployeeSchedule = (props) => {
-
-//     return(
-//         <div className="container">
-//             <table>
-//                 <thead>
-//                    
-//                     <tr>
-//                         <th data-field="name">Name</th>
-//                         <th data-field="Mon">Monday</th>
-//                         <th data-field="Tues">Tuesday</th>
-//                         <th data-field="Wed">Wednesday</th>
-//                         <th data-field="Thurs">Thursday</th>
-//                         <th data-field="Fri">Friday</th>
-//                         <th data-field="Sat">Saturday</th>
-//                         <th data-field="Sun">Sunday</th>
-//                     </tr>
-//                 </thead>
-//                     <tbody className="bordered striped" >
-//                         <tr className="hoverable striped">
-//                             <td>Chris Mosier</td>
-//                             <td> <Row>
-//                                     <Input s={12} type='select' label="Select Shift" onChange={(e) => this.handleChange('shift', e)}>
-//                                     <option value={0}></option>
-//                                     <option value={1}>8AM - 5PM</option>
-//                                     <option value={2}>9AM - 6PM</option>
-//                                     <option value={3}>10AM - 7PM</option>
-//                                     <option value={4}>11AM - 8PM</option>
-//                                     <option value={5}>12PM - 9PM</option>
-//                                     <option value={6}>1PM - 10PM</option>
-//                                     <option value={7}>2PM - 11PM</option>
-//                                     <option value={8}>3PM - 12PM</option>
-//                                     </Input>
-//                                 </Row></td>
-//                             <td> <Row>
-//                                     <Input s={12} type='select' label="Select Shift" onChange={(e) => this.handleChange('manager', e)}>
-//                                     <option value={0}></option>
-//                                     <option value={1}>8AM - 5PM</option>
-//                                     <option value={2}>9AM - 6PM</option>
-//                                     <option value={3}>10AM - 7PM</option>
-//                                     <option value={4}>11AM - 8PM</option>
-//                                     <option value={5}>12PM - 9PM</option>
-//                                     <option value={6}>1PM - 10PM</option>
-//                                     <option value={7}>2PM - 11PM</option>
-//                                     <option value={8}>3PM - 12PM</option>
-//                                     </Input>
-//                                 </Row></td>
-//                             <td> <Row>
-//                                     <Input s={12} type='select' label="Select Shift" onChange={(e) => this.handleChange('manager', e)}>
-//                                     <option value={0}></option>
-//                                     <option value={1}>8AM - 5PM</option>
-//                                     <option value={2}>9AM - 6PM</option>
-//                                     <option value={3}>10AM - 7PM</option>
-//                                     <option value={4}>11AM - 8PM</option>
-//                                     <option value={5}>12PM - 9PM</option>
-//                                     <option value={6}>1PM - 10PM</option>
-//                                     <option value={7}>2PM - 11PM</option>
-//                                     <option value={8}>3PM - 12PM</option>
-//                                     </Input>
-//                                 </Row></td>
-//                             <td> <Row>
-//                                     <Input s={12} type='select' label="Select Shift" onChange={(e) => this.handleChange('manager', e)}>
-//                                     <option value={0}></option>
-//                                     <option value={1}>8AM - 5PM</option>
-//                                     <option value={2}>9AM - 6PM</option>
-//                                     <option value={3}>10AM - 7PM</option>
-//                                     <option value={4}>11AM - 8PM</option>
-//                                     <option value={5}>12PM - 9PM</option>
-//                                     <option value={6}>1PM - 10PM</option>
-//                                     <option value={7}>2PM - 11PM</option>
-//                                     <option value={8}>3PM - 12PM</option>
-//                                     </Input>
-//                                 </Row></td>
-//                             <td> <Row>
-//                                     <Input s={12} type='select' label="Select Shift" onChange={(e) => this.handleChange('manager', e)}>
-//                                     <option value={0}></option>
-//                                     <option value={1}>8AM - 5PM</option>
-//                                     <option value={2}>9AM - 6PM</option>
-//                                     <option value={3}>10AM - 7PM</option>
-//                                     <option value={4}>11AM - 8PM</option>
-//                                     <option value={5}>12PM - 9PM</option>
-//                                     <option value={6}>1PM - 10PM</option>
-//                                     <option value={7}>2PM - 11PM</option>
-//                                     <option value={8}>3PM - 12PM</option>
-//                                     </Input>
-//                                 </Row></td>
-//                             <td> <Row>
-//                                     <Input s={12} type='select' label="Select Shift" onChange={(e) => this.handleChange('manager', e)}>
-//                                     <option value={0}></option>
-//                                     <option value={1}>8AM - 5PM</option>
-//                                     <option value={2}>9AM - 6PM</option>
-//                                     <option value={3}>10AM - 7PM</option>
-//                                     <option value={4}>11AM - 8PM</option>
-//                                     <option value={5}>12PM - 9PM</option>
-//                                     <option value={6}>1PM - 10PM</option>
-//                                     <option value={7}>2PM - 11PM</option>
-//                                     <option value={8}>3PM - 12PM</option>
-//                                     </Input>
-//                                 </Row></td>
-//                             <td> <Row>
-//                                     <Input s={12} type='select' label="Select Shift" onChange={(e) => this.handleChange('manager', e)}>
-//                                     <option value={0}></option>
-//                                     <option value={1}>8AM - 5PM</option>
-//                                     <option value={2}>9AM - 6PM</option>
-//                                     <option value={3}>10AM - 7PM</option>
-//                                     <option value={4}>11AM - 8PM</option>
-//                                     <option value={5}>12PM - 9PM</option>
-//                                     <option value={6}>1PM - 10PM</option>
-//                                     <option value={7}>2PM - 11PM</option>
-//                                     <option value={8}>3PM - 12PM</option>
-//                                     </Input>
-//                                 </Row></td>
-//                             <td><button className="btn btn-default">Add</button></td>
-//                             <td><button className="btn btn-default red">Remove</button></td>
-//                         </tr>
-//                         <tr className="hoverable">
-//                             <td>Chris Mosier</td>
-//                             <td>8AM - 9PM</td>
-//                             <td></td>
-//                             <td>8AM - 5PM</td>
-//                             <td></td>
-//                             <td></td>
-//                             <td>8AM - 5PM</td>
-//                             <td>8AM - 5PM</td>
-//                             <td><button className="btn btn-default">Add</button></td>
-//                             <td><button className="btn btn-default red">Remove</button></td>
-//                         </tr>
-//                         <tr className="hoverable">
-//                             <td>Chris Mosier</td>
-//                             <td>8AM - 9PM</td>
-//                             <td></td>
-//                             <td>8AM - 5PM</td>
-//                             <td></td>
-//                             <td></td>
-//                             <td>8AM - 5PM</td>
-//                             <td>8AM - 5PM</td>
-//                             <td><button className="btn btn-default">Add</button></td>
-//                             <td><button className="btn btn-default red">Remove</button></td>
-//                         </tr>
-//                         <tr className="hoverable">
-//                             <td>Chris Mosier</td>
-//                             <td>8AM - 9PM</td>
-//                             <td></td>
-//                             <td>8AM - 5PM</td>
-//                             <td></td>
-//                             <td></td>
-//                             <td>8AM - 5PM</td>
-//                             <td>8AM - 5PM</td>
-//                             <td><button className="btn btn-default">Add</button></td>
-//                             <td><button className="btn btn-default red">Remove</button></td>
-//                         </tr>
-//                         <tr className="hoverable">
-//                             <td>Chris Mosier</td>
-//                             <td>8AM - 9PM</td>
-//                             <td></td>
-//                             <td>8AM - 5PM</td>
-//                             <td></td>
-//                             <td></td>
-//                             <td>8AM - 5PM</td>
-//                             <td>8AM - 5PM</td>
-//                             <td><button className="btn btn-default">Add</button></td>
-//                             <td><button className="btn btn-default red">Remove</button></td>
-//                         </tr>
-//                         <tr className="hoverable">
-//                             <td>Chris Mosier</td>
-//                             <td>8AM - 9PM</td>
-//                             <td></td>
-//                             <td>8AM - 5PM</td>
-//                             <td></td>
-//                             <td></td>
-//                             <td>8AM - 5PM</td>
-//                             <td>8AM - 5PM</td>
-//                             <td><button className="btn btn-default">Add</button></td>
-//                             <td><button className="btn btn-default red">Remove</button></td>
-//                         </tr>
-//                     </tbody>
-//             </table>
-
-//         </div>
-//     )
-
-// }
 
 export default EmployeeSchedule

@@ -4,7 +4,6 @@ import AddNewEmployeeForm from '../../components/AddNewEmployeeForm/AddNewEmploy
 
 
 const AddEmployeeModal = (props) => {
-    console.log("ADDEMPLOYEEMODAL",props)
     return(
         <Modal
             header='Add New Employee'

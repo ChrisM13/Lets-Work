@@ -72,7 +72,6 @@ class SignupForm extends Component {
                   <option value={true}>Manager</option>
                 </Input>
               </Row>
-              {/* <input type="boolean" className="form-control select-dropdown" placeholder="Are you a manager?" value={this.state.manager} onChange={(e) => this.handleChange('manager', e)} /> */}
             </div>
           </div>
           <div className="form-group">

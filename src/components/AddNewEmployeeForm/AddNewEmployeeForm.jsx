@@ -6,8 +6,8 @@ class AddNewEmployeeForm extends Component {
     constructor(props) {
         super(props);
         this.state= {
-            name: 'a',
-            email: 'a@g.com'
+            name: '',
+            email: ''
         };
     }
 
@@ -49,8 +49,7 @@ class AddNewEmployeeForm extends Component {
                 </div>
                 <div className="form-group">
                         <div className="col-sm-12 text-center">
-                        <button className="btn btn-default" disabled={this.isFormInvalid()}>Add</button>&nbsp;&nbsp;
-                        <button className="btn btn-default red"><Link to='/manager/scheduler'>Cancel</Link></button>
+                        <button className="btn btn-default" disabled={this.isFormInvalid()}>Add</button>
                 </div>
                 </div>
             </form>
