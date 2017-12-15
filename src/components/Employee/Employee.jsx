@@ -13,12 +13,13 @@ const Employee = (props) => {
     return (
 
          props.allUsers.length ? (props.allUsers.map((employee, idx) => {
+             console.log("ALLUSERS Employee > find Shift", employee);
             return (
             <tr className="hoverable striped" key={idx}>
                 <td key={employee._id}>{employee.name}</td>
                 {days.map((day, id) => (
                     <td key={id}>
-                        <Input s={12} type='select' label="Select Shift" onChange={(evt) => props.handleDropdownChange(evt, day, employee._id)}>
+                        <Input s={12} type='select' value={employee.schedule ? employee.schedule[day] : ""} label="Select Shift" onChange={(evt) => props.handleDropdownChange(evt, day, employee._id)}>
                             {shifts.map(shift => {
                                 return(
                                 <option key={shift._id} value={shift.time}>{shift.time}</option>
