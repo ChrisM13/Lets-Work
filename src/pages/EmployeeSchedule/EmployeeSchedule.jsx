@@ -141,29 +141,29 @@ class EmployeeSchedule extends Component {
         })
     }
 
-    // handleAddEmployee = (newEmployee) => {
-    //     console.log('newEmployee =', newEmployee)
-    //     // fetch('api/users', {
-    //     //     method: "POST",
-    //     //     headers: {
-    //     //         Accept: 'application/json',
-    //     //         'Content-Type': 'application/json',
-    //     //     },
-    //     //     body: JSON.stringify({
-    //     //         employees: [...this.state.employees, response]
-    //     //     })
-    //     // })
-    //     //     .then(res => res.json())
-    //     //     .catch(err => {
-    //     //         console.error(err);
-    //     //     });
-    //     // make fetch request
-    //     // upon succesful response, update the states like this:
-    //     const response = newEmployee // mock response
-    //     this.setState({ 
-    //         employees: [...this.state.employees, response]
-    //     })
-    // }
+    handleAddEmployee = (newEmployee) => {
+        console.log('newEmployee =', newEmployee)
+        // fetch('api/users', {
+        //     method: "POST",
+        //     headers: {
+        //         Accept: 'application/json',
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify({
+        //         employees: [...this.state.employees, response]
+        //     })
+        // })
+        //     .then(res => res.json())
+        //     .catch(err => {
+        //         console.error(err);
+        //     });
+        // make fetch request
+        // upon succesful response, update the states like this:
+        const response = newEmployee // mock response
+        this.setState({ 
+            employees: [...this.state.employees, response]
+        })
+    }
     
     render() {
         if (this.state.employees.length === 0) {
