@@ -48,7 +48,6 @@ class App extends Component {
 /*---------- Employee Schedules ----------*/
  
 handleDropdownChange = (e, day, id) => {
-  console.log('id =', id, 'day =', day, 'value =', e.target.value)
   var currentSchedule = this.state.schedules
 
   if (currentSchedule[id] === undefined) {
@@ -58,7 +57,6 @@ handleDropdownChange = (e, day, id) => {
     currentSchedule[id][day] = e.target.value
   }
 
-  console.log('setting state')
   this.setState({
       schedules: currentSchedule
   })
