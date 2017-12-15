@@ -2,17 +2,23 @@
 <h1>Lets Work</h1>
 <br />
 <br />
-<p><strong>Lets Work</strong> is an app taht allows an employer/manager veiw and update employee shifts for their own record.</p>
+<p><strong>Lets Work</strong> is an app that allows an employer/manager veiw and update employee shifts for their own record.</p>
 <br />
 <h1>Screen Shots</h1>
-
-
+<br />
+<a href="https://imgur.com/qgdbtLJ"><img src="https://i.imgur.com/qgdbtLJ.png" title="source: imgur.com" /></a>
+<br/>
+<a href="https://imgur.com/bfxvWMs"><img src="https://i.imgur.com/bfxvWMs.png" title="source: imgur.com" /></a>
+<br/>
+<a href="https://imgur.com/h1XJhgE"><img src="https://i.imgur.com/h1XJhgE.png" title="source: imgur.com" /></a>
 <br />
 <h1>Technology used</h1>
-Mongo
-Express
-React
-Nodejs
+<ul>
+<li>Mongo</li>
+<li>Express</li>
+<li>React</li>
+<li>Nodejs</li>
+</ul>
 <br />
 React Materialize
 <br />
