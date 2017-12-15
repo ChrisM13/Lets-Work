@@ -18,12 +18,15 @@
 <li>Express</li>
 <li>React</li>
 <li>Nodejs</li>
+<br/>
+<li>React Materialize</li>
 </ul>
 <br />
-React Materialize
+
 <br />
 <h1Installation instructions></h1>
 <a href="https://lets-work.herokuapp.com/scheduler">Lets Work App Link</a>
+<br />
 <a href="https://trello.com/b/dDKOYTIy/project-4-lets-work">Lets Work Trello</a>
 <br />
 
