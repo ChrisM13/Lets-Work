@@ -48,7 +48,7 @@ class App extends Component {
 /*---------- Employee Schedules ----------*/
  
 handleDropdownChange = (e, day, id) => {
-
+  console.log('id =', id, 'day =', day, 'value =', e.target.value)
   var currentSchedule = this.state.schedules
 
   if (currentSchedule[id] === undefined) {
@@ -58,14 +58,16 @@ handleDropdownChange = (e, day, id) => {
     currentSchedule[id][day] = e.target.value
   }
 
+  console.log('setting state')
   this.setState({
       schedules: currentSchedule
   })
 }
 
-saveSchedule = () => {
-  return fetch('api/employees', {
-          method: "POST",
+saveSchedule = (e, id) => {
+  console.log('id =', id)
+  return fetch(`api/employees/${id}/schedule`, {
+          method: 'put',
           headers: new Headers({
             'Content-Type': 'application/json'
           }),
@@ -74,7 +76,7 @@ saveSchedule = () => {
           })  
       })
       .then(response => response.json())
-      .then(data => console.log(data))
+      .then(data => console.log('app.js > saveScheulde > data =', data))
       .catch(err => {
           console.error(err);
       });
@@ -109,6 +111,7 @@ saveSchedule = () => {
                 user={this.state.user}
                 handleDropdownChange={this.handleDropdownChange}
                 saveSchedule = {this.saveSchedule}
+                allUsers={this.state.allUsers}
                 />
               }/>
               <Route exact path='/employees' render={(props) =>
