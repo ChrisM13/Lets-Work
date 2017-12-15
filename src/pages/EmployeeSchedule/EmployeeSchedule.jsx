@@ -159,15 +159,16 @@ class EmployeeSchedule extends Component {
                     {...this.props}
                     />
                     <div className="container">
+                        <AddEmployeeModal
+                            handleAddEmployee={this.handleAddEmployee}
+                        />
                         <WeeklySchedule 
                             handleChange={this.handleChange}
                             employees ={this.state.employees}
                             shifts ={this.state.shifts}
                             saveSchedule={this.props.saveSchedule}
                             handleDropdownChange={this.props.handleDropdownChange}
-                        />
-                        <AddEmployeeModal
-                            handleAddEmployee={this.handleAddEmployee}
+                            allUsers={this.props.allUsers}
                         />
                     </div>
                 </div>

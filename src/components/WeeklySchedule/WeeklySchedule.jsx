@@ -23,6 +23,7 @@ const WeeklySchedule = (props) => {
                 handleChange={props.handleChange}
                 handleDropdownChange={props.handleDropdownChange}
                 saveSchedule = {props.saveSchedule}
+                allUsers={props.allUsers}
                  />
 
             </tbody>
