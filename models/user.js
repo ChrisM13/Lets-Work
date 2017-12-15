@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const schedule = require('./schedule')
 const Schema = mongoose.Schema;
 
 const SALT_ROUNDS = 6;
@@ -18,23 +17,18 @@ const userSchema = new Schema({
         type: Boolean, 
         default: false
     },
-    schedule: [{type: Schema.Types.ObjectId, ref: "Schedule"}]
+    schedule: {
+        Mon: String,
+        Tues: String,
+        Wed: String,
+        Thurs: String,
+        Fri: String,
+        Sat: String,
+        Sun: String
+        }
     }, {
     timestamps: true
 });
-
-var user = {
-    schedule: [
-        {
-            day: 'monday',
-            shiftId: 123
-        },
-        {
-            day: 'tuesday',
-            shiftId: 456
-        }
-    ]
-}
 
 userSchema.set('toJSON', {
     transform: function(doc, ret) {

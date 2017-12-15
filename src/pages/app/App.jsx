@@ -16,7 +16,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      allUsers: []
+      allUsers: [],
+      schedules: {}
     }
   }
 
@@ -38,7 +39,47 @@ class App extends Component {
   componentDidMount() {
       let user = userService.getUser();
       this.setState({user});
+
+      fetch('/api/users/get-all-users')
+        .then(data => data.json())
+        .then(users => this.setState({allUsers: users}))
   }
+
+/*---------- Employee Schedules ----------*/
+ 
+handleDropdownChange = (e, day, id) => {
+
+  var currentSchedule = this.state.schedules
+
+  if (currentSchedule[id] === undefined) {
+    currentSchedule[id] = {}
+    currentSchedule[id][day] = e.target.value
+  } else {
+    currentSchedule[id][day] = e.target.value
+  }
+
+  this.setState({
+      schedules: currentSchedule
+  })
+}
+
+saveSchedule = () => {
+  return fetch('api/employees', {
+          method: "POST",
+          headers: new Headers({
+            'Content-Type': 'application/json'
+          }),
+          body: JSON.stringify({
+              schedules: this.state.schedules
+          })  
+      })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(err => {
+          console.error(err);
+      });
+}
+
   render() {
     return (
       <div>
@@ -66,12 +107,16 @@ class App extends Component {
               <EmployeeSchedule
                 {...props}
                 user={this.state.user}
+                handleDropdownChange={this.handleDropdownChange}
+                saveSchedule = {this.saveSchedule}
                 />
               }/>
               <Route exact path='/employees' render={(props) =>
               <EmployeeSchedule
                 {...props}
                 user={this.state.user}
+                handleDropdownChange={this.handleDropdownChange}
+                saveSchedule = {this.saveSchedule}
                 />
               }/>
           </Switch>

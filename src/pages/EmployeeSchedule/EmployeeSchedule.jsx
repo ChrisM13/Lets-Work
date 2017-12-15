@@ -35,29 +35,11 @@ class EmployeeSchedule extends Component {
 
     getEmployees() {
         console.log('Getting Employees')
-        this.setState({employees: [
-            {
-                _id: 1,
-                name: 'Chris',
-                manager: false,
-                scheudle: []
-            },
-            {
-                _id: 2,
-                name: 'Sam',
-                manager: false
-            },
-            {
-                _id: 3,
-                name: 'Nancy',
-                manager: false
-            }
-        ]})
-
-        // console.log('making api call for employee')
-         // fetch('/api/employees/' + this.state.id).then(employees=>this.setState({employees: employees}))
         
-
+        // console.log('making api call for employee')
+        // fetch('/api/employees/' + this.state.id).then(employees=>this.setState({employees: employees}))
+        
+        
         
         //------AJ---------
         // get data of employee list
@@ -65,6 +47,24 @@ class EmployeeSchedule extends Component {
         // this.setState({})
         //make fetch call
         //then set state with data from api call
+                                this.setState({employees: [
+                                    {
+                                        _id: 1,
+                                        name: 'Chris',
+                                        manager: false,
+                                        scheudle: []
+                                    },
+                                    {
+                                        _id: 2,
+                                        name: 'Sam',
+                                        manager: false
+                                    },
+                                    {
+                                        _id: 3,
+                                        name: 'Nancy',
+                                        manager: false
+                                    }
+                                ]})
         
     }
 
@@ -119,32 +119,26 @@ class EmployeeSchedule extends Component {
 
     handleAddEmployee = (newEmployee) => {
         console.log('newEmployee =', newEmployee)
-        
+        // fetch('api/users', {
+        //     method: "POST",
+        //     headers: {
+        //         Accept: 'application/json',
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify({
+        //         employees: [...this.state.employees, response]
+        //     })
+        // })
+        //     .then(res => res.json())
+        //     .catch(err => {
+        //         console.error(err);
+        //     });
         // make fetch request
         // upon succesful response, update the states like this:
         const response = newEmployee // mock response
         this.setState({ 
             employees: [...this.state.employees, response]
         })
-    }
-
-    saveSchedule = () => {
-        console.log("SENDING EMPLOYEE DATA TO DATABASE")
-        // this.setState({employees: [...]})
-        return fetch('api/employees', {
-                method: "POST",
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    employees: this.state.employees
-                })  
-            })
-            .then(response => response.json())
-            .catch(err => {
-                console.error(err);
-            });
     }
     
     render() {
@@ -169,8 +163,8 @@ class EmployeeSchedule extends Component {
                             handleChange={this.handleChange}
                             employees ={this.state.employees}
                             shifts ={this.state.shifts}
-                            saveSchedule={this.saveSchedule}
-                            handleDropdownChange={this.handleDropdownChange}
+                            saveSchedule={this.props.saveSchedule}
+                            handleDropdownChange={this.props.handleDropdownChange}
                         />
                         <AddEmployeeModal
                             handleAddEmployee={this.handleAddEmployee}
@@ -190,6 +184,8 @@ class EmployeeSchedule extends Component {
                         handleChange={this.handleChange}    
                         employees = {this.state.employees}
                         shifts = {this.state.shifts}
+                        handleDropdownChange={this.props.handleDropdownChange}
+                        saveSchedule = {this.props.saveSchedule}
                     />
                 </div>
             )

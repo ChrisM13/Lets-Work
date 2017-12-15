@@ -15,7 +15,7 @@ const Employee = (props) => {
                 <td key={employee._id}>{employee.name}</td>
                 {days.map((day, id) => (
                     <td key={id}>
-                        <Input s={12} type='select' label="Select Shift" onChange={props.handleDropdownChange}>
+                        <Input s={12} type='select' label="Select Shift" onChange={(evt) => props.handleDropdownChange(evt, day, employee._id)}>
                             {shifts.map(shift => {
                                 return(
                                 <option key={shift._id} value={shift.time}>{shift.time}</option>
