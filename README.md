@@ -24,7 +24,7 @@
 <br />
 
 <br />
-<h1Installation instructions></h1>
+<h1>Installation instructions</h1>
 <a href="https://lets-work.herokuapp.com/scheduler">Lets Work App Link</a>
 <br />
 <a href="https://trello.com/b/dDKOYTIy/project-4-lets-work">Lets Work Trello</a>
