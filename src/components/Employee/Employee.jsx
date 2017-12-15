@@ -4,7 +4,6 @@ import {Row, Col, Preloader} from 'react-materialize';
 import './Employee.css'
 
 const Employee = (props) => {
-    // const employees = props.employees;
     const shifts = props.shifts;
     console.log("Employee PROPS", props)
     const days = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"];
