@@ -10,6 +10,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import Header from '../../components/Header/NavBar/NavBar';
 import EmployeeSchedule from '../../pages/EmployeeSchedule/EmployeeSchedule'
 import userService from '../../utils/userService';
+import LandingVideo from '../../components/LandingVideo/LandingVideo'
 
 
 class App extends Component {
@@ -86,10 +87,13 @@ saveSchedule = (e, id) => {
         <Router>
           <Switch>
             <Route exact path='/' render={() =>
+            <div>
                 <Header
                   user={this.state.user}
                   handleLogout={this.handleLogout}
                 />
+                <LandingVideo />
+            </div>
               }/>
             <Route exact path='/signup' render={(props) =>
               <SignupPage
