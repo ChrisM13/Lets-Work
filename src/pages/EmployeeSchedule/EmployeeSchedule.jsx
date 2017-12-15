@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import AddEmployeeModal from '../../components/AddEmployeeModal/AddEmployeeModal';
+// import AddEmployeeModal from '../../components/AddEmployeeModal/AddEmployeeModal';
 import WeeklySchedule from '../../components/WeeklySchedule/WeeklySchedule';
 import Header from '../../components/Header/Header';
 import {Row, Col, Preloader} from 'react-materialize';
@@ -85,6 +85,30 @@ class EmployeeSchedule extends Component {
                 _id: 3,
                 time: '9AM - 6PM'
             },
+            {
+                _id: 4,
+                time: '10AM - 7PM'
+            },
+            {
+                _id: 5,
+                time: '11AM - 8PM'
+            },
+            {
+                _id: 6,
+                time: '12AM - 9PM'
+            },
+            {
+                _id: 7,
+                time: '1PM - 10PM'
+            },
+            {
+                _id: 8,
+                time: '2PM - 11PM'
+            },
+            {
+                _id: 9,
+                time: '3PM - 12PM'
+            }
         ]})
     }
 
@@ -117,29 +141,29 @@ class EmployeeSchedule extends Component {
         })
     }
 
-    handleAddEmployee = (newEmployee) => {
-        console.log('newEmployee =', newEmployee)
-        // fetch('api/users', {
-        //     method: "POST",
-        //     headers: {
-        //         Accept: 'application/json',
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify({
-        //         employees: [...this.state.employees, response]
-        //     })
-        // })
-        //     .then(res => res.json())
-        //     .catch(err => {
-        //         console.error(err);
-        //     });
-        // make fetch request
-        // upon succesful response, update the states like this:
-        const response = newEmployee // mock response
-        this.setState({ 
-            employees: [...this.state.employees, response]
-        })
-    }
+    // handleAddEmployee = (newEmployee) => {
+    //     console.log('newEmployee =', newEmployee)
+    //     // fetch('api/users', {
+    //     //     method: "POST",
+    //     //     headers: {
+    //     //         Accept: 'application/json',
+    //     //         'Content-Type': 'application/json',
+    //     //     },
+    //     //     body: JSON.stringify({
+    //     //         employees: [...this.state.employees, response]
+    //     //     })
+    //     // })
+    //     //     .then(res => res.json())
+    //     //     .catch(err => {
+    //     //         console.error(err);
+    //     //     });
+    //     // make fetch request
+    //     // upon succesful response, update the states like this:
+    //     const response = newEmployee // mock response
+    //     this.setState({ 
+    //         employees: [...this.state.employees, response]
+    //     })
+    // }
     
     render() {
         if (this.state.employees.length === 0) {
@@ -159,9 +183,9 @@ class EmployeeSchedule extends Component {
                     {...this.props}
                     />
                     <div className="container">
-                        <AddEmployeeModal
+                        {/* <AddEmployeeModal
                             handleAddEmployee={this.handleAddEmployee}
-                        />
+                        /> */}
                         <WeeklySchedule 
                             handleChange={this.handleChange}
                             employees ={this.state.employees}
@@ -180,7 +204,6 @@ class EmployeeSchedule extends Component {
                     <Header 
                     {...this.props}
                     />
-                    Hellow World
                     <WeeklySchedule 
                         handleChange={this.handleChange}    
                         employees = {this.state.employees}

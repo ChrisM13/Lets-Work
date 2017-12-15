@@ -1,18 +1,19 @@
 var User = require('../models/user');
 
-function create(req, res) {
-    console.log("req.body", req.body)
-    console.log("hitting the sch controller")
-    // find all users. push to users.schedule
-};
-
 function editSchedule(req, res) {
-    console.log('req.params =', req.params)
-    console.log('req.body =', req.body);
-    res.json({test: 'hello'});
+    var paramsId = req.params.id.toString()
+    var updatedUser = {
+        schedule: req.body.schedules[paramsId]
+    }
+
+    User.findByIdAndUpdate(req.params.id, updatedUser)
+        .then(user => {
+            console.log('user =', user)
+            res.json({user})
+        })
+        .catch(err => console.error(err))
 }
 
 module.exports = {
-    create,
     editSchedule
 }

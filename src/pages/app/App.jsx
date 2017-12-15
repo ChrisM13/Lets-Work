@@ -63,7 +63,6 @@ handleDropdownChange = (e, day, id) => {
 }
 
 saveSchedule = (e, id) => {
-  console.log('id =', id)
   return fetch(`api/employees/${id}/schedule`, {
           method: 'put',
           headers: new Headers({
@@ -75,6 +74,7 @@ saveSchedule = (e, id) => {
       })
       .then(response => response.json())
       .then(data => console.log('app.js > saveScheulde > data =', data))
+      .then(console.log(this.state.schedules))
       .catch(err => {
           console.error(err);
       });
@@ -112,14 +112,14 @@ saveSchedule = (e, id) => {
                 allUsers={this.state.allUsers}
                 />
               }/>
-              <Route exact path='/employees' render={(props) =>
+              {/* <Route exact path='/employees' render={(props) =>
               <EmployeeSchedule
                 {...props}
                 user={this.state.user}
                 handleDropdownChange={this.handleDropdownChange}
                 saveSchedule = {this.saveSchedule}
                 />
-              }/>
+              }/> */}
           </Switch>
         </Router>
       </div>

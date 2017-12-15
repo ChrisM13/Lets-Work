@@ -14,3 +14,8 @@
     bottom: 0;
     right: 0;
 }
+
+.dropList {
+    overflow: scroll;
+    height: 5px;
+}

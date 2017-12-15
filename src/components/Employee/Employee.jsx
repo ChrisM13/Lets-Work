@@ -30,7 +30,6 @@ const Employee = (props) => {
                     </td>
                 ))}
                         <td><button className="btn btn-default" onClick={(e) => props.saveSchedule(e, employee._id) }>SAVE</button></td>
-                        <td><button className="btn btn-default red">CLEAR</button></td>
             </tr>
             )
         })) :  <Row className="preloader">
